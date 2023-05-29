@@ -5,6 +5,7 @@ const ErrorHandler = require("../utils/errorHandler");
 // create new product => /api/v1/admin/product/new
 exports.newProduct = async (req, res, next) => {
   try {
+    req.body.user = req.user.id;
     let product = await Product.create(req.body);
     res.status(201).json({
       success: true,
@@ -35,7 +36,7 @@ exports.updateProduct = async (req, res, next) => {
       runValidators: true,
       useFindAndModify: false,
     });
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       product,
     });
