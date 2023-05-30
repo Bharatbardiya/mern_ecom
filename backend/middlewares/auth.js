@@ -9,17 +9,14 @@ module.exports.isAuthenticatedUser = async (req, res, next) => {
 
     // console.log(token);
     if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: "You are not authenticated",
-      });
+      return next(new ErrorHandler("You are not authenticated", 401));
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = await User.findById(decoded.id);
 
-    next();
+    return next();
 
     // slkdf
   } catch (err) {

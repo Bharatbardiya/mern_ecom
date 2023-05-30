@@ -21,10 +21,7 @@ exports.registerUser = async (req, res, next) => {
 
     sendToken(user, 200, res);
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    return next(new ErrorHandler(error));
   }
 };
 
@@ -128,6 +125,68 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
+// get currently logged in user details => /api/v1/me
+
+exports.getUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+// update or change password => /api/v1/password/update
+exports.updatePassword = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select("+password");
+
+    //check if old password correct or not
+    const isMatched = await user.comparePassword(req.body.oldPassword);
+    // console.log(isMatched);
+
+    if (!isMatched) {
+      return next(new ErrorHandler("Old password is incorrect", 401));
+    }
+    user.password = req.body.newPassword;
+    await user.save();
+
+    sendToken(user, 200, res);
+  } catch (err) {
+    return next(new ErrorHandler(err.message, 500));
+  }
+};
+
+// update user profile  => /api/v1/me/update
+exports.updateProfile = async (req, res, next) => {
+  try {
+    const newUserData = {
+      name: req.body.name,
+      email: req.body.email,
+    };
+
+    // Update avatar : TODO
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err.message, 500));
+  }
+};
+
 // logout the user  /api/v1/logout
 exports.logoutUser = async (req, res, next) => {
   res.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true });
@@ -135,4 +194,87 @@ exports.logoutUser = async (req, res, next) => {
     success: true,
     message: "Logged out successfully",
   });
+};
+
+// Admin Routes
+
+// Get all users list => /api/v1/admin/users
+
+exports.allUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+
+    return res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err.message, 500));
+  }
+};
+
+// get user details  =>/api/v1/admin/user/:id
+exports.getUserDetails = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return next(
+        new ErrorHandler(`User not found of id : ${req.params.id}`, 404)
+      );
+    }
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err.message, 500));
+  }
+};
+
+// update user profile  => /api/v1/admin/user/:id
+exports.updateUser = async (req, res, next) => {
+  try {
+    const newUserData = {
+      name: req.body.name,
+      email: req.body.email,
+      role: req.body.role,
+    };
+
+    // Update avatar : TODO
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err.message, 500));
+  }
+};
+
+// Delete user   =>/api/v1/admin/user/:id
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return next(
+        new ErrorHandler(`User not found of id : ${req.params.id}`, 404)
+      );
+    }
+
+    // REMOVE AVATAR from cloudinary - TODO
+
+    await User.findByIdAndDelete(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err.message, 500));
+  }
 };

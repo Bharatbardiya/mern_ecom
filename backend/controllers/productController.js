@@ -117,3 +117,113 @@ exports.deleteProduct = async (req, res, next) => {
     });
   }
 };
+
+// create/update review => /api/v1/review
+
+exports.createProductReview = async (req, res, next) => {
+  try {
+    const { rating, comment, productId } = req.body;
+
+    const review = {
+      user: req.user._id,
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+    };
+
+    const product = await Product.findById(productId);
+
+    const isReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+
+    if (!isReviewed) {
+      product.reviews.push(review);
+      product.numOfReviews = product.reviews.length;
+    } else {
+      product.reviews.forEach((review) => {
+        if (review.user.toString() === req.user._id.toString()) {
+          review.rating = rating;
+          review.comment = comment;
+        }
+      });
+    }
+
+    product.ratings =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length;
+
+    await product.save({ validateBeforeSave: false });
+
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err, 500));
+  }
+};
+
+// Get Product Reviews => /api/v1/reviews
+
+exports.getProductReviews = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.query.id);
+
+    return res.status(200).json({
+      success: true,
+      reviews: product.reviews,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err, 500));
+  }
+};
+
+// Delete Product Reviews => /api/v1/reviews
+exports.getProductReviews = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.query.id);
+
+    const reviews = product.reviews.filter((review) => review);
+    return res.status(200).json({
+      success: true,
+      reviews: product.reviews,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err, 500));
+  }
+};
+
+// Delete Product Review => /api/v1/reviews
+exports.deleteReview = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.query.productId);
+
+    const reviews = product.reviews.filter(
+      (review) => review._id.toString() !== req.query.id.toString()
+    );
+
+    const numOfReviews = reviews.length;
+    const ratings =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      reviews.length;
+
+    await Product.findByIdAndUpdate(
+      req.query.productId,
+      {
+        reviews,
+        ratings,
+        numOfReviews,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(new ErrorHandler(err, 400));
+  }
+};
