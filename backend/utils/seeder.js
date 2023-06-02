@@ -14,7 +14,12 @@ const seedProduct = async () => {
     await Product.deleteMany();
     console.log("product deleted");
 
-    await Product.insertMany(products);
+    products.forEach((prd) => {
+      prd.user = "6475a5283f30bb9ad9ed3a87";
+      prd.createdAt = Date.now();
+    });
+
+    await Product.insertMany(products, {});
     console.log("product inserted successfully");
 
     process.exit(0);
