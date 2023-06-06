@@ -5,6 +5,15 @@ const errorMiddleware = require("./middlewares/errors");
 
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
+
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 //Import all routes
 const products = require("./routes/product");
 const auth = require("./routes/auth");

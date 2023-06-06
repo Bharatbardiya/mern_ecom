@@ -1,10 +1,13 @@
 import React from "react";
 import ReactStars from "react-stars";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import Loader from "../../layout/loader";
 
 const Products = () => {
   const { products, loading, error, productCount } = useSelector(
-    (state) => state.Products
+    (state) => state.products
   );
   // console.log(products);
   // console.log(loading);
@@ -14,12 +17,13 @@ const Products = () => {
   return (
     <div className="products">
       {loading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : (
         products.map((product, i) => {
           return (
             <ProductCard
-              key={product.id}
+              id={product._id}
+              key={product._id}
               imgSrc={product.images[0].url}
               title={product.name}
               rating={product.ratings}
@@ -29,30 +33,23 @@ const Products = () => {
           );
         })
       )}
-      <ProductCard
-        imgSrc="https://m.media-amazon.com/images/I/617NtexaW2L._AC_UY218_.jpg"
-        title={"128GB Solid Storage Memory card - SanDisk Ultra"}
-        rating={4.5}
-        noOfReview={5}
-        price={45.67}
-      />
     </div>
   );
 };
 
-const ProductCard = ({ key, imgSrc, title, rating, noOfReview, price }) => {
+const ProductCard = ({ id, imgSrc, title, rating, noOfReview, price }) => {
   return (
     <div className="product-card">
       <img className="" src={imgSrc} />
       <div className="product-details">
         <h5 className="product-title">
-          <a href="">{title}</a>
+          <Link to={`/product/${id}`}>{title}</Link>
         </h5>
         <div className="product-rating">
           <ReactStars
             count={5}
             value={Number(rating)}
-            size={30}
+            size={20}
             color2={"#ffd700"}
             edit={false}
             half={true}
@@ -60,9 +57,9 @@ const ProductCard = ({ key, imgSrc, title, rating, noOfReview, price }) => {
           <span id="no_of_reviews">({noOfReview} Reviews)</span>
         </div>
         <p className="product-price">${price}</p>
-        <a href="#" className="product-btn">
+        <Link to={`/product/:${id}`} className="product-btn">
           View Details
-        </a>
+        </Link>
       </div>
     </div>
   );

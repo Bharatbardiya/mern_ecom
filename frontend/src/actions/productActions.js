@@ -4,20 +4,54 @@ import {
   ALL_PRODUCTS_FAIL,
   ALL_PRODUCTS_REQUEST,
   ALL_PRODUCTS_SUCCESS,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 
-export const getProducts = async (dispatch) => {
+export const getProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCTS_REQUEST });
+
     const { data } = await axios.get("/api/v1/products");
-    // console.log(data);
 
     dispatch({
       type: ALL_PRODUCTS_SUCCESS,
       payload: data,
     });
   } catch (err) {
-    console.log(err);
+    dispatch({
+      type: ALL_PRODUCTS_FAIL,
+      payload: err.response.data.message,
+    });
   }
+};
+
+export const getProductDetails = (id) => async (dispatch) => {
+  try {
+    // console.log(id, "hi from product action");
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
+
+    const response = await axios.get(`/api/v1/product/${id}`);
+    // console.log(response);
+    const { data } = response;
+
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data.product,
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload: err.response.data.message,
+    });
+  }
+};
+
+// Clear Errors
+export const clearErrors = async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
 };

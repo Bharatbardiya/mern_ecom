@@ -1,15 +1,19 @@
 import React, { Fragment, useEffect } from "react";
 import Products from "./Products.jsx";
-import MetaData from "../layout/MetaData.jsx";
-
+import MetaData from "../../layout/MetaData.jsx";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../actions/productActions.js";
+import { getProducts } from "../../actions/productActions.js";
 
 const Home = () => {
   const dispatch = useDispatch();
+  // const { error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    getProducts(dispatch);
+    // if (error) {
+    //   return toast.error(error);
+    // }
+    dispatch(getProducts());
   }, [dispatch]);
 
   return (

@@ -51,8 +51,9 @@ exports.updateProduct = async (req, res, next) => {
 // get all product => api/v1/products
 exports.getProducts = async (req, res, next) => {
   try {
-    const resPerPage = 4;
-    const productCount = await Product.countDocuments();
+    // return next(new ErrorHandler("my new error", 400));
+    const resPerPage = 8;
+    const productsCount = await Product.countDocuments();
     const apiFeatures = new APIFeatures(Product.find(), req.query)
       .search()
       .filter()
@@ -62,7 +63,7 @@ exports.getProducts = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      productCount,
+      productsCount,
       count: products.length,
       products,
     });
