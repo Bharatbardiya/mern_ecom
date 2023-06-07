@@ -1,9 +1,7 @@
 import React from "react";
-import {
-  AiFillCrown,
-  AiOutlineSearch,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { Routes, Route } from "react-router-dom";
+import { AiFillCrown, AiOutlineShoppingCart } from "react-icons/ai";
+import Search from "./Search";
 
 const Header = () => {
   return (
@@ -16,12 +14,7 @@ const Header = () => {
           <h1>ShopNow</h1>
         </div>
       </a>
-      <div className="search-bar">
-        <input type="text" />
-        <button>
-          <AiOutlineSearch />
-        </button>
-      </div>
+      <Search />
       <div className="side-bar">
         <button>Login</button>
         <div className="cart-icon">

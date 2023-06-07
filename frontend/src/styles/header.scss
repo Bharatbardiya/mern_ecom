@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1100px;
+  // max-width: 1100px;
   margin: auto;
 
   > .logo {
@@ -33,7 +33,7 @@
     }
   }
 
-  > .search-bar {
+  > form > .search-bar {
     // border: 2px solid black;
     display: flex;
     gap: 5px;

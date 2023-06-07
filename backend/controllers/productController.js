@@ -52,20 +52,25 @@ exports.updateProduct = async (req, res, next) => {
 exports.getProducts = async (req, res, next) => {
   try {
     // return next(new ErrorHandler("my new error", 400));
-    const resPerPage = 8;
+    const resPerPage = 4;
     const productsCount = await Product.countDocuments();
     const apiFeatures = new APIFeatures(Product.find(), req.query)
       .search()
-      .filter()
-      .pagination(resPerPage);
+      .filter();
 
     let products = await apiFeatures.query;
+    let filterProductsCount = products.length;
+
+    apiFeatures.pagination(resPerPage);
+    // products = await apiFeatures.query;
+    products = await apiFeatures.query.clone();
 
     res.status(200).json({
       success: true,
       productsCount,
-      count: products.length,
+      resPerPage,
       products,
+      filterProductsCount,
     });
   } catch (err) {
     return res.status(400).json({

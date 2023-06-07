@@ -19,7 +19,7 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        products.map((product, i) => {
+        products?.map((product, i) => {
           return (
             <ProductCard
               id={product._id}
