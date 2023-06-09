@@ -1,0 +1,29 @@
+.login-profile {
+    > svg {
+        color: green;
+        height: 80px;
+        width: 80px;
+        border: 1px solid blue;
+        padding: 15px;
+        border-radius: 50%;
+    }
+    h3 {
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+}
+
+.custom-login-btn {
+    color: #198754;
+    border: 1px solid #198754;
+    border-radius: 6px;
+    padding: 0 10px;
+    font-weight: 400;
+    transition: all 0.2s linear;
+    &:hover {
+        > a {
+            color: white;
+        }
+        background-color: #198754;
+    }
+}

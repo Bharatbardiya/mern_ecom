@@ -1,0 +1,16 @@
+module.exports.LOGIN_REQUEST = "LOGIN_REQUEST";
+module.exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
+module.exports.LOGIN_FAIL = "LOGIN_FAIL";
+
+module.exports.REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
+module.exports.REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
+module.exports.REGISTER_USER_FAIL = "REGISTER_USER_FAIL";
+
+module.exports.LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
+module.exports.LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
+module.exports.LOAD_USER_FAIL = "LOAD_USER_FAIL";
+
+module.exports.LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+module.exports.LOGOUT_FAIL = "LOGOUT_FAIL";
+
+module.exports.CLEAR_ERRORS = "CLEAR_ERRORS";
