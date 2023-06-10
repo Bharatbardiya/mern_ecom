@@ -1,40 +1,50 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+
 import MetaData from "../../layout/MetaData";
-
 import { useDispatch, useSelector } from "react-redux";
-import { register, clearErrors } from "../../actions/userActions";
 
-const Register = () => {
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-    });
+import {
+    updateProfile,
+    loadUser,
+    clearErrors,
+} from "../../actions/userActions";
+import { useNavigate } from "react-router-dom";
+import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 
-    const { name, email, password } = user;
-
+const UpdateProfile = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [avatar, setAvatar] = useState("");
     const [avatarPreview, setAvatarPreview] = useState(
         "/images/default_user_img.png"
     );
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isAuthenticated, error, loading } = useSelector(
-        (state) => state.auth
-    );
-
+    const { user } = useSelector((state) => state.auth);
+    const { error, isUpdated, loading } = useSelector((state) => state.user);
     useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/");
+        if (user) {
+            setName(user.name);
+            setEmail(user.email);
+            setAvatarPreview(user.avatar.url);
         }
         if (error) {
             toast.error(error);
             dispatch(clearErrors());
         }
-    }, [dispatch, navigate, isAuthenticated, error]);
+        if (isUpdated) {
+            toast.success("user updated successfully");
+            dispatch(loadUser());
+
+            navigate("/me");
+
+            dispatch({
+                type: UPDATE_PROFILE_RESET,
+            });
+        }
+    }, [dispatch, navigate, user, error, isUpdated]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -42,31 +52,27 @@ const Register = () => {
         const formData = new FormData();
         formData.set("name", name);
         formData.set("email", email);
-        formData.set("password", password);
         formData.set("avatar", avatar);
 
-        dispatch(register(formData));
+        dispatch(updateProfile(formData));
     };
 
     const onChange = (e) => {
-        if (e.target.name === "avatar") {
-            const reader = new FileReader();
+        const reader = new FileReader();
 
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setAvatarPreview(reader.result);
-                    setAvatar(reader.result);
-                }
-            };
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setAvatarPreview(reader.result);
+                setAvatar(reader.result);
+            }
+        };
 
-            reader.readAsDataURL(e.target.files[0]);
-        } else {
-            setUser({ ...user, [e.target.name]: e.target.value });
-        }
+        reader.readAsDataURL(e.target.files[0]);
     };
+
     return (
         <Fragment>
-            <MetaData title={"Register - ShopNow"} />
+            <MetaData title={"Register"} />
             <div className="container-lg h-auto d-flex justify-content-center align-items-center">
                 <div className="col-12 col-sm-10 col-lg-8 col-xl-6 m-auto">
                     <form
@@ -75,7 +81,7 @@ const Register = () => {
                         encType="multipart/form-data"
                     >
                         <h4 className="text-center primary">
-                            Register to ShopNow
+                            Update Your Profile
                         </h4>
                         <div className="form-group m-3">
                             <label htmlFor="name">Name</label>
@@ -86,7 +92,9 @@ const Register = () => {
                                 placeholder="Enter Name"
                                 name="name"
                                 value={name}
-                                onChange={onChange}
+                                onChange={(e) => {
+                                    setName(e.target.value);
+                                }}
                             />
                         </div>
                         <div className="form-group m-3">
@@ -99,19 +107,9 @@ const Register = () => {
                                 placeholder="Enter email"
                                 name="email"
                                 value={email}
-                                onChange={onChange}
-                            />
-                        </div>
-                        <div className="form-group m-3">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                className="form-control mt-1 mb-2"
-                                id="password"
-                                placeholder="Password"
-                                name="password"
-                                value={password}
-                                onChange={onChange}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }}
                             />
                         </div>
 
@@ -151,14 +149,8 @@ const Register = () => {
                             className="btn btn-primary my-2 mx-3"
                             disabled={loading ? true : false}
                         >
-                            Register
+                            Update
                         </button>
-                        <div className="form-group mx-3 my-1">
-                            <p className="">
-                                Already have an Account{" "}
-                                <Link to="/login">Login</Link>
-                            </p>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -166,4 +158,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default UpdateProfile;

@@ -9,10 +9,16 @@ import Home from "./components/home/Home";
 import ProductDetails from "./components/home/ProductDetails";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
+import UpdateProfile from "./components/user/UpdateProfile";
+import UpdatePassword from "./components/user/UpdatePassword";
+import ForgotPassword from "./components/user/ForgotPassword";
+import NewPassword from "./components/user/NewPassword";
 import Notfound from "./layout/Notfound";
 import "./styles/app.scss";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
+import Profile from "./components/user/Profile";
+import ProtectedRoutes from "./components/route/ProtectedRoutes";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -20,7 +26,7 @@ axios.defaults.withCredentials = true;
 function App() {
     useEffect(() => {
         store.dispatch(loadUser());
-    });
+    }, []);
 
     return (
         <Router>
@@ -32,6 +38,27 @@ function App() {
                     <Route path="/product/:id" element={<ProductDetails />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route
+                        path="/password/reset/:token"
+                        element={<NewPassword />}
+                    />
+                    <Route
+                        path="/password/forgot"
+                        element={<ForgotPassword />}
+                    />
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path="/me" element={<Profile />} exact />
+                        <Route
+                            path="/me/update"
+                            element={<UpdateProfile />}
+                            exact
+                        />
+                        <Route
+                            path="/password/update"
+                            element={<UpdatePassword />}
+                            exact
+                        />
+                    </Route>
                     <Route path="*" element={<Notfound />} />
                 </Routes>
                 <Footer />

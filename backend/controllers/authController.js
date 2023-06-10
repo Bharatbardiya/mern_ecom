@@ -28,7 +28,7 @@ exports.registerUser = async (req, res, next) => {
 
         sendToken(user, 200, res);
     } catch (error) {
-        return next(new ErrorHandler(error));
+        return next(new ErrorHandler(error.message, 500));
     }
 };
 
@@ -64,7 +64,7 @@ exports.forgotPassword = async (req, res, next) => {
     try {
         const { email } = req.body;
         const user = await User.findOne({ email });
-        console.log(user);
+        // console.log(user);
         if (!user) {
             return next(new ErrorHandler("Invalid Email", 401));
         }
@@ -72,20 +72,26 @@ exports.forgotPassword = async (req, res, next) => {
         // console.log(resetToken);
         await user.save({ validateBeforeSave: false });
 
-        const resetUrl = `${req.protocol}://${req.get(
-            "host"
-        )}/api/v1/password/reset/${resetToken}`;
+        const resetUrl = `http://localhost:3000/password/reset/${resetToken}`;
 
         const message = `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
     Please click on the following link, or paste this into your browser to complete the process:\n
     ${resetUrl}\n
     If you did not request this, please ignore this email and your password will remain unchanged.\n`;
 
-        await sendEmail(email, "RESET password on ShopNow", message);
-        return res.status(200).json({
-            success: true,
-            message: `RESET Url send on your mail : ${email}`,
-        });
+        const result = await sendEmail(
+            email,
+            "RESET password on ShopNow",
+            message
+        );
+        if (result.success === true) {
+            return res.status(200).json({
+                success: true,
+                message: `RESET Url send on your mail : ${email}`,
+            });
+        } else {
+            return res.status(500).json(result);
+        }
     } catch (err) {
         return next(new ErrorHandler(err.message, 500));
     }
@@ -178,7 +184,27 @@ exports.updateProfile = async (req, res, next) => {
             email: req.body.email,
         };
 
-        // Update avatar : TODO
+        // Update avatar
+        if (req.body.avatar !== "") {
+            const user = await User.findById(req.user.id);
+            const image_id = user.avatar.public_id;
+
+            const result = await cloudinary.v2.uploader.upload(
+                req.body.avatar,
+                {
+                    folder: "avatars",
+                    width: 150,
+                    crop: "scale",
+                }
+            );
+
+            const res = await cloudinary.v2.uploader.destroy(image_id);
+
+            newUserData.avatar = {
+                public_id: result.public_id,
+                url: result.secure_url,
+            };
+        }
 
         const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
             new: true,

@@ -21,15 +21,15 @@ const Header = () => {
     };
     return (
         <Fragment>
-            <nav className="navbar navbar-expand-sm navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
-                    <a
+                    <Link
                         className="navbar-brand"
-                        href="#"
+                        to="/"
                         style={{ fontSize: "1.8rem", fontWeight: "bold" }}
                     >
                         ShopNow
-                    </a>
+                    </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -70,9 +70,9 @@ const Header = () => {
                                                 borderRadius: "50%",
                                             }}
                                             src={user?.avatar?.url}
-                                            alt={user?.name}
+                                            alt={user?.name?.split(" ")[0]}
                                         />
-                                        <span>{user?.name}</span>
+                                        <span>{user?.name?.split(" ")[0]}</span>
                                     </Link>
                                     <ul
                                         className="dropdown-menu dropdown-menu-end"
@@ -110,7 +110,7 @@ const Header = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                className="dropdown-item text-danger"
+                                                className="dropdown-item text-danger custom-logout-btn"
                                                 to="/"
                                                 onClick={logoutHandler}
                                             >

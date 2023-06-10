@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 import Loader from "../../layout/loader";
@@ -30,20 +31,20 @@ const Login = () => {
             navigate("/");
         }
         if (error) {
-            alert(error);
-            return dispatch(clearErrors());
+            toast.error(error);
+            dispatch(clearErrors());
         }
-    }, [error, dispatch, isAuthenticated]);
+    }, [navigate, error, dispatch, isAuthenticated]);
 
     return loading ? (
         <Loader />
     ) : (
         <Fragment>
-            <MetaData title={"Login - ShopNow"} />
+            <MetaData title={"Login"} />
             <div className="container-lg h-auto d-flex justify-content-center align-items-center">
                 <div className="col-12 col-lg-8 col-xl-6 m-auto">
                     <form
-                        className="pt-4 m-5 border border-primary rounded"
+                        className="pt-4 m-5 myshadow rounded"
                         onSubmit={submitHandler}
                     >
                         <div className="form-group d-flex flex-column align-items-center justify-content-center login-profile">

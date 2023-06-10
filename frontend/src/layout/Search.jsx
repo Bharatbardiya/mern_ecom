@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -26,7 +25,7 @@ const Search = () => {
                 }}
             />
             <button className="btn btn-outline-success" type="submit">
-                <i class="bi bi-search"></i>
+                <i className="bi bi-search"></i>
             </button>
         </form>
     );
