@@ -10,7 +10,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const { user, loading, error } = useSelector((state) => state.auth);
-
+    const { cartItems } = useSelector((state) => state.cart);
     const logoutHandler = () => {
         dispatch(logout());
         if (error) {
@@ -21,7 +21,7 @@ const Header = () => {
     };
     return (
         <Fragment>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-md navbar-light bg-light">
                 <div className="container-fluid">
                     <Link
                         className="navbar-brand"
@@ -47,10 +47,12 @@ const Header = () => {
                     >
                         <Search />
                         <ul className="navbar-nav">
-                            <li className="nav-item">
+                            <li className="nav-item cart-btn-custom border rounded me-3">
                                 <Link className="nav-link" to="/cart">
-                                    <span className="h5">Cart</span>
                                     <i className="h5 ms-1 bi bi-cart-check"></i>
+                                    <span className="ms-2 h5">
+                                        {cartItems.length}
+                                    </span>
                                 </Link>
                             </li>
                             {user ? (

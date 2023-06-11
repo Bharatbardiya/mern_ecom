@@ -19,6 +19,7 @@ import { loadUser } from "./actions/userActions";
 import store from "./store";
 import Profile from "./components/user/Profile";
 import ProtectedRoutes from "./components/route/ProtectedRoutes";
+import Cart from "./components/cart/Cart";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/search/:keyword" element={<Home />} />
                     <Route path="/product/:id" element={<ProductDetails />} />
+                    <Route path="/cart" element={<Cart />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route
