@@ -95,7 +95,6 @@ const Header = () => {
                                             <Link
                                                 to="/orders/me"
                                                 className="dropdown-item"
-                                                href="#"
                                             >
                                                 My Order
                                             </Link>

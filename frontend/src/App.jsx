@@ -23,6 +23,8 @@ import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
+import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/OrderDetails";
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
@@ -68,6 +70,8 @@ function App() {
                             element={<ConfirmOrder />}
                         />
                         <Route path="/payment" element={<Payment />} />
+                        <Route path="/orders/me" element={<ListOrders />} />
+                        <Route path="/orders/:id" element={<OrderDetails />} />
                     </Route>
                     <Route path="*" element={<Notfound />} />
                 </Routes>
