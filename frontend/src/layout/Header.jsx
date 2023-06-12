@@ -81,15 +81,7 @@ const Header = () => {
                                         aria-labelledby="navbarDropdown"
                                     >
                                         <li>
-                                            {user && user.role !== "admin" ? (
-                                                <Link
-                                                    to="/orders/me"
-                                                    className="dropdown-item"
-                                                    href="#"
-                                                >
-                                                    My Order
-                                                </Link>
-                                            ) : (
+                                            {user && user.role === "admin" && (
                                                 <Link
                                                     to="/dashboard"
                                                     className="dropdown-item"
@@ -98,6 +90,15 @@ const Header = () => {
                                                     Dashboard
                                                 </Link>
                                             )}
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to="/orders/me"
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                My Order
+                                            </Link>
                                         </li>
                                         <li>
                                             <Link

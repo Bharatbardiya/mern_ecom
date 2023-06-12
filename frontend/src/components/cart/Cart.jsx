@@ -2,10 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
 import MetaData from "../../layout/MetaData";
-
-import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearErrors } from "../../actions/productActions";
 import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 
 const Cart = () => {
@@ -31,7 +28,7 @@ const Cart = () => {
                                         </h4>
                                         {cartItems.map((item) => (
                                             <CartItem
-                                                key={item.product_id}
+                                                key={item.product}
                                                 item={item}
                                             />
                                         ))}
@@ -54,8 +51,6 @@ const Cart = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <!-- cart --> */}
-                            {/* <!-- summary --> */}
                             <div className="col-lg-3">
                                 <div className="card mb-3 border shadow-0">
                                     <div className="card-body">
@@ -98,7 +93,9 @@ const Cart = () => {
                                 <div className="card shadow-0 border">
                                     <div className="card-body">
                                         <div className="d-flex justify-content-between">
-                                            <p className="mb-2">Total price:</p>
+                                            <p className="mb-2">
+                                                Subtotal price:
+                                            </p>
                                             <p className="mb-2">
                                                 $
                                                 {cartItems.reduce(
@@ -107,8 +104,8 @@ const Cart = () => {
                                                         Number(
                                                             item.price *
                                                                 item.quantity
-                                                        ).toFixed(2),
-                                                    0
+                                                        ),
+                                                    Number(0)
                                                 )}
                                             </p>
                                         </div>
@@ -130,27 +127,27 @@ const Cart = () => {
                                                         Number(
                                                             item.price *
                                                                 item.quantity
-                                                        ).toFixed(2),
-                                                    0
+                                                        ),
+                                                    Number(0)
                                                 )}
                                             </p>
                                         </div>
 
                                         <div className="mt-3">
-                                            <a
-                                                href="#"
+                                            <Link
+                                                to="/shipping"
                                                 className="btn btn-success w-100 shadow-0 mb-2"
+                                                // onClick={checkOutHandler}
                                             >
-                                                {" "}
-                                                Make Purchase{" "}
-                                            </a>
-                                            <a
-                                                href="#"
+                                                Checkout
+                                            </Link>
+                                            <Link
+                                                to={"/"}
                                                 className="btn btn-light w-100 border mt-2"
                                             >
                                                 {" "}
                                                 Back to shop{" "}
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -166,22 +163,25 @@ const Cart = () => {
 
 const CartItem = ({ item }) => {
     const dispatch = useDispatch();
+    const [totalPrice, setTotalPrice] = useState(item.price * item.quantity);
 
     const increaseQty = () => {
         let qty = item.quantity;
         if (qty >= item?.stock) return;
         qty += 1;
 
-        dispatch(addItemToCart(item.product_id, qty));
+        dispatch(addItemToCart(item.product, qty));
+        setTotalPrice(item.price * item.quantity);
     };
     const decreaseQty = () => {
         let qty = item.quantity;
         if (qty <= 1) return;
         qty -= 1;
-        dispatch(addItemToCart(item.product_id, qty));
+        dispatch(addItemToCart(item.product, qty));
+        setTotalPrice(item.price * item.quantity);
     };
     const removeItemHandler = () => {
-        dispatch(removeItemFromCart(item.product_id));
+        dispatch(removeItemFromCart(item.product));
     };
     return (
         <div className="row gy-3 mb-4">
@@ -198,7 +198,7 @@ const CartItem = ({ item }) => {
                         />
                         <div className="">
                             <Link
-                                to={`/product/${item.product_id}`}
+                                to={`/product/${item.product}`}
                                 className="nav-link"
                             >
                                 {item.name.substring(20) + "..."}
@@ -242,7 +242,7 @@ const CartItem = ({ item }) => {
                     </button>
                 </div>
                 <div className="">
-                    <span className="h6">$1156.00</span> <br />
+                    <span className="h6">${totalPrice.toFixed(2)}</span> <br />
                     <small className="text-muted text-nowrap">
                         {" "}
                         ${item.price} / per item{" "}

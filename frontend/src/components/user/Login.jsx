@@ -44,7 +44,7 @@ const Login = () => {
             <div className="container-lg h-auto d-flex justify-content-center align-items-center">
                 <div className="col-12 col-lg-8 col-xl-6 m-auto">
                     <form
-                        className="pt-4 m-5 myshadow rounded"
+                        className="pt-4 m-5 myshadow rounded pb-2"
                         onSubmit={submitHandler}
                     >
                         <div className="form-group d-flex flex-column align-items-center justify-content-center login-profile">
@@ -92,7 +92,7 @@ const Login = () => {
                         >
                             Login
                         </button>
-                        <div className="form-group mx-3 my-1 ">
+                        <div className="form-group mx-3 mt-1">
                             <p>
                                 don't have an Account{" "}
                                 <Link to="/register">Sign Up</Link>

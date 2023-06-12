@@ -20,7 +20,9 @@ import store from "./store";
 import Profile from "./components/user/Profile";
 import ProtectedRoutes from "./components/route/ProtectedRoutes";
 import Cart from "./components/cart/Cart";
-
+import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
+import Payment from "./components/cart/Payment";
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
@@ -60,6 +62,12 @@ function App() {
                             element={<UpdatePassword />}
                             exact
                         />
+                        <Route path="/shipping" element={<Shipping />} />
+                        <Route
+                            path="/confirm/order"
+                            element={<ConfirmOrder />}
+                        />
+                        <Route path="/payment" element={<Payment />} />
                     </Route>
                     <Route path="*" element={<Notfound />} />
                 </Routes>

@@ -1,18 +1,25 @@
-import { ADD_TO_CART, REMOVE_ITEM_CART } from "../constants/cartConstants";
+import {
+    ADD_TO_CART,
+    REMOVE_ITEM_CART,
+    SAVE_SHIPPING_INFO,
+} from "../constants/cartConstants";
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (
+    state = { cartItems: [], shippingInfo: {} },
+    action
+) => {
     switch (action.type) {
         case ADD_TO_CART:
             const item = action.payload;
             const isItemExist = state.cartItems.find(
-                (i) => i.product_id === item.product_id
+                (i) => i.product === item.product
             );
 
             if (isItemExist) {
                 return {
                     ...state,
                     cartItems: state.cartItems.map((i) =>
-                        i.product_id === isItemExist.product_id ? item : i
+                        i.product === isItemExist.product ? item : i
                     ),
                 };
             } else {
@@ -25,10 +32,15 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
             return {
                 ...state,
                 cartItems: state.cartItems.filter(
-                    (item) => item.product_id !== action.payload
+                    (item) => item.product !== action.payload
                 ),
             };
 
+        case SAVE_SHIPPING_INFO:
+            return {
+                ...state,
+                shippingInfo: action.payload,
+            };
         default:
             return state;
     }
