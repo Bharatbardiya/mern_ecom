@@ -154,7 +154,7 @@ const NewProduct = () => {
                             </label>
                             <select
                                 required
-                                className="form-control"
+                                className="form-select"
                                 id="category_field"
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}

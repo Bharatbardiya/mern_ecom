@@ -20,6 +20,7 @@ const ListReviews = ({ reviews }) => {
                                             <ReactStars
                                                 count={5}
                                                 size={30}
+                                                edit={false}
                                                 color2={"#ffd700"}
                                                 value={review.rating}
                                             />

@@ -112,7 +112,7 @@ const ProductList = () => {
             <div className="row">
                 <Sidebar />
 
-                <div className="col-12 col-lg-9 col-xl-10 m-4">
+                <div className="col-12 col-lg-9 col-xl-10 p-4">
                     <Fragment>
                         <h1 className="my-5 ms-3">All Products</h1>
 

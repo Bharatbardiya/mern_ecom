@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../actions/productActions";
 import { allOrders } from "../../actions/orderActions";
+import { allUsers } from "../../actions/userActions";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -12,9 +13,12 @@ const Dashboard = () => {
     const { orders, totalAmount, loading } = useSelector(
         (state) => state.allOrders
     );
+    const { users } = useSelector((state) => state.allUsers);
+
     useEffect(() => {
         dispatch(getAdminProducts());
         dispatch(allOrders());
+        dispatch(allUsers());
     }, [dispatch]);
     return (
         <div className="container-fluid">
@@ -73,18 +77,20 @@ const Dashboard = () => {
                             <div class="col-sm-6 col-lg-4 col-xl-3">
                                 <div class="card my-2 bg-info-subtle">
                                     <div class="card-body">
-                                        <h5 class="card-title">
-                                            Special title treatment
-                                        </h5>
+                                        <h5 class="card-title">Users</h5>
                                         <p class="card-text">
-                                            With supporting text below as a
-                                            natural lead-in to additional
-                                            content.
+                                            Total :
+                                            <b className="ms-1">
+                                                {users?.length}
+                                            </b>
                                         </p>
-                                        <a href="#" class="btn btn-primary">
+                                        <Link
+                                            to="/admin/users"
+                                            class="btn btn-primary"
+                                        >
                                             View{" "}
                                             <i class="bi bi-arrow-right"></i>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

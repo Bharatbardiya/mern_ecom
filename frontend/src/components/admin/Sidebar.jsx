@@ -56,14 +56,20 @@ const Sidebar = () => {
                 </li>
                 <li>
                     <Link to="/admin/orders" className="nav-link link-dark">
-                        <i className="bi bi-grid-fill pe-2 fs-5"></i>
+                        <i className="bi bi-grid pe-2 fs-5"></i>
                         Orders
                     </Link>
                 </li>
                 <li>
-                    <Link to="/" className="nav-link link-dark ">
-                        <i className="bi bi-person-circle pe-2 fs-5 "></i>
-                        Customers
+                    <Link to="/admin/users" className="nav-link link-dark ">
+                        <i className="bi bi-people pe-2 fs-5"></i>
+                        Users
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/admin/reviews" className="nav-link link-dark ">
+                        <i className="bi bi-star pe-2 fs-5"></i>
+                        Reviews
                     </Link>
                 </li>
             </ul>

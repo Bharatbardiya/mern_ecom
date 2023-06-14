@@ -35,6 +35,9 @@ import ProductList from "./components/admin/ProductsList";
 import NewProduct from "./components/admin/NewProduct";
 import OrdersList from "./components/admin/OrdersList";
 import ProcessOrder from "./components/admin/ProcessOrder";
+import UsersList from "./components/admin/UsersList";
+import UpdateUser from "./components/admin/UpdateUser";
+import ProductReviews from "./components/admin/ProductReviews";
 
 import "./styles/app.scss";
 import { loadUser } from "./actions/userActions";
@@ -115,6 +118,20 @@ function App() {
                             path="/admin/order/:id"
                             element={<ProcessOrder />}
                             exact
+                        />
+                        <Route
+                            path="/admin/users"
+                            element={<UsersList />}
+                            exact
+                        />
+                        <Route
+                            path="/admin/user/:id"
+                            element={<UpdateUser />}
+                            exact
+                        />
+                        <Route
+                            path="/admin/reviews"
+                            element={<ProductReviews />}
                         />
                     </Route>
                     <Route path="*" element={<Notfound />} />
