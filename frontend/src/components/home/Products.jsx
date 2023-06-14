@@ -15,23 +15,25 @@ const Products = () => {
     // console.log(productCount);
 
     return (
-        <div className="products">
+        <div className="mt-4">
             {loading ? (
                 <Loader />
             ) : (
-                products?.map((product, i) => {
-                    return (
-                        <ProductCard
-                            id={product._id}
-                            key={product._id}
-                            imgSrc={product.images[0].url}
-                            title={product.name}
-                            rating={product.ratings}
-                            noOfReview={product.numOfReviews}
-                            price={product.price}
-                        />
-                    );
-                })
+                <div className="row">
+                    {products?.map((product, i) => {
+                        return (
+                            <ProductCard
+                                id={product._id}
+                                key={product._id}
+                                imgSrc={product.images[0].url}
+                                title={product.name}
+                                rating={product.ratings}
+                                noOfReview={product.numOfReviews}
+                                price={product.price}
+                            />
+                        );
+                    })}
+                </div>
             )}
         </div>
     );
@@ -39,13 +41,15 @@ const Products = () => {
 
 const ProductCard = ({ id, imgSrc, title, rating, noOfReview, price }) => {
     return (
-        <div className="product-card">
-            <img className="" src={imgSrc} />
-            <div className="product-details">
-                <h5 className="product-title">
-                    <Link to={`/product/${id}`}>{title}</Link>
+        <div class="card my-3 mx-auto" style={{ width: "18rem" }}>
+            <img src={imgSrc} class="card-img-top" alt="..." />
+            <div class="card-body">
+                <h5 class="card-title">
+                    <Link className="link-dark " to={`/product/${id}`}>
+                        {title}
+                    </Link>
                 </h5>
-                <div className="product-rating">
+                <div className="d-flex align-items-center">
                     <ReactStars
                         count={5}
                         value={Number(rating)}
@@ -54,10 +58,13 @@ const ProductCard = ({ id, imgSrc, title, rating, noOfReview, price }) => {
                         edit={false}
                         half={true}
                     />
-                    <span id="no_of_reviews">({noOfReview} Reviews)</span>
+                    <span className="ms-1 text-muted">
+                        ({noOfReview} Reviews)
+                    </span>
                 </div>
-                <p className="product-price">${price}</p>
-                <Link to={`/product/${id}`} className="product-btn">
+                <p className="card-text">${price}</p>
+
+                <Link to={`/product/${id}`} className="btn btn-primary">
                     View Details
                 </Link>
             </div>

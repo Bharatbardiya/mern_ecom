@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Loader from "../../layout/loader";
 import MetaData from "../../layout/MetaData";
 
@@ -85,98 +86,28 @@ const ProductDetails = () => {
                     <section className="py-5">
                         <div className="container">
                             <div className="row gx-5">
-                                <aside className="col-lg-6 mb-5">
-                                    <div
-                                        id="carouselExampleIndicators"
-                                        className="carousel slide carousel-fade"
-                                        data-bs-ride="carousel"
+                                <div className="col-lg-6">
+                                    <Carousel
+                                        autoPlay
+                                        infiniteLoop
+                                        interval={5000}
+                                        showStatus={false}
+                                        showThumbs={true}
+                                        showArrows={true}
                                     >
-                                        <div className="carousel-inner mb-5">
-                                            <div className="carousel-item active">
+                                        {product?.images.map((image) => (
+                                            <div style={{ height: "400px" }}>
                                                 <img
-                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(88).webp"
-                                                    className="d-block w-100"
-                                                    alt="..."
+                                                    style={{
+                                                        height: "inherit",
+                                                        width: "inherit",
+                                                    }}
+                                                    src={image.url}
                                                 />
                                             </div>
-
-                                            {product?.images.map((img, i) => (
-                                                <div
-                                                    key={i}
-                                                    className={`carousel-item ${
-                                                        i === 0 ? "active" : ""
-                                                    }`}
-                                                >
-                                                    <img
-                                                        src={img.url}
-                                                        className="d-block w-100"
-                                                        alt="..."
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <button
-                                            className="carousel-control-prev"
-                                            type="button"
-                                            data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide="prev"
-                                        >
-                                            <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            ></span>
-                                            <span className="visually-hidden">
-                                                Previous
-                                            </span>
-                                        </button>
-                                        <button
-                                            className="carousel-control-next"
-                                            type="button"
-                                            data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide="next"
-                                        >
-                                            <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            ></span>
-                                            <span className="visually-hidden">
-                                                Next
-                                            </span>
-                                        </button>
-
-                                        <div
-                                            className="carousel-indicators"
-                                            style={{ marginBottom: "-20px" }}
-                                        >
-                                            {product?.images.map((img, i) => (
-                                                <button
-                                                    key={i}
-                                                    type="button"
-                                                    data-bs-target="#carouselExampleIndicators"
-                                                    data-bs-slide-to={`${i}`}
-                                                    className={`${
-                                                        i === 0 ? "active" : ""
-                                                    }`}
-                                                    aria-current={`${
-                                                        i === 0
-                                                            ? "true"
-                                                            : "false"
-                                                    }`}
-                                                    aria-label={`Slide ${
-                                                        i + 1
-                                                    }`}
-                                                    style={{ width: "100px" }}
-                                                >
-                                                    <img
-                                                        className="d-block w-100 img-fluid"
-                                                        src={img.url}
-                                                    />
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </aside>
+                                        ))}
+                                    </Carousel>
+                                </div>
                                 <main className="col-lg-6">
                                     <div className="ps-lg-3">
                                         <h4 className="title text-dark">

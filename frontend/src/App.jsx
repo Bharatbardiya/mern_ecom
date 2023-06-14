@@ -3,28 +3,47 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
 
+// Layout Components
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import Notfound from "./layout/Notfound";
+
+// Product components
 import Home from "./components/home/Home";
 import ProductDetails from "./components/home/ProductDetails";
+import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/OrderDetails";
+
+// User Components
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
-import Notfound from "./layout/Notfound";
-import "./styles/app.scss";
-import { loadUser } from "./actions/userActions";
-import store from "./store";
 import Profile from "./components/user/Profile";
-import ProtectedRoutes from "./components/route/ProtectedRoutes";
+
+// Cart and Order Components
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
-import ListOrders from "./components/order/ListOrders";
-import OrderDetails from "./components/order/OrderDetails";
+
+// Admin Components
+import Dashboard from "./components/admin/Dashboard";
+import ProductList from "./components/admin/ProductsList";
+import NewProduct from "./components/admin/NewProduct";
+import OrdersList from "./components/admin/OrdersList";
+import ProcessOrder from "./components/admin/ProcessOrder";
+
+import "./styles/app.scss";
+import { loadUser } from "./actions/userActions";
+import store from "./store";
+import ProtectedRoutes from "./components/route/ProtectedRoutes";
+
+///
+///
+///
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
@@ -72,6 +91,31 @@ function App() {
                         <Route path="/payment" element={<Payment />} />
                         <Route path="/orders/me" element={<ListOrders />} />
                         <Route path="/orders/:id" element={<OrderDetails />} />
+                        <Route
+                            path="/dashboard"
+                            isAdmin={true}
+                            element={<Dashboard />}
+                        />
+                        <Route
+                            path="/admin/products"
+                            isAdmin={true}
+                            element={<ProductList />}
+                        />
+                        <Route
+                            path="/admin/product"
+                            element={<NewProduct />}
+                            exact
+                        />
+                        <Route
+                            path="/admin/orders"
+                            element={<OrdersList />}
+                            exact
+                        />
+                        <Route
+                            path="/admin/order/:id"
+                            element={<ProcessOrder />}
+                            exact
+                        />
                     </Route>
                     <Route path="*" element={<Notfound />} />
                 </Routes>
