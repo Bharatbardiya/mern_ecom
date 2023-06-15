@@ -47,7 +47,7 @@ import ProtectedRoutes from "./components/route/ProtectedRoutes";
 ///
 ///
 ///
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "http://localhost:3020";
 axios.defaults.withCredentials = true;
 
 function App() {
