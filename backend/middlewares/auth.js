@@ -4,36 +4,39 @@ const User = require("../models/user");
 const ErrorHandler = require("../utils/errorHandler");
 
 module.exports.isAuthenticatedUser = async (req, res, next) => {
-  try {
-    const token = req.cookies.token;
+    try {
+        const token = req.cookies.token;
 
-    // console.log(token);
-    if (!token) {
-      return next(new ErrorHandler("You are not authenticated", 401));
+        console.log("cookies :", req.cookies);
+        if (!token) {
+            return next(new ErrorHandler("You are not authenticated", 401));
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        req.user = await User.findById(decoded.id);
+
+        return next();
+
+        // slkdf
+    } catch (err) {
+        return res.status(401).json({
+            success: false,
+            message: "token nhi h " + err.message,
+        });
     }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    req.user = await User.findById(decoded.id);
-
-    return next();
-
-    // slkdf
-  } catch (err) {
-    return res.status(401).json({
-      success: false,
-      message: "token nhi h " + err.message,
-    });
-  }
 };
 
 exports.authorizeRoles = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      next(
-        new ErrorHandler(`Role (${req.user.role}) can't access this page`, 403)
-      );
-    }
-    next();
-  };
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            next(
+                new ErrorHandler(
+                    `Role (${req.user.role}) can't access this page`,
+                    403
+                )
+            );
+        }
+        next();
+    };
 };
