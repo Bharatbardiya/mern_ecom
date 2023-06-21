@@ -43,11 +43,11 @@ import "./styles/app.scss";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 import ProtectedRoutes from "./components/route/ProtectedRoutes";
-
+import AdminProtectedRoutes from "./components/route/AdminProtectedRoutes.js";
 ///
 ///
 ///
-axios.defaults.baseURL = "http://localhost:3020";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -94,6 +94,8 @@ function App() {
                         <Route path="/payment" element={<Payment />} />
                         <Route path="/orders/me" element={<ListOrders />} />
                         <Route path="/orders/:id" element={<OrderDetails />} />
+                    </Route>
+                    <Route element={<AdminProtectedRoutes />}>
                         <Route
                             path="/dashboard"
                             isAdmin={true}

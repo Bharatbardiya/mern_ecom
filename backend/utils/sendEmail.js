@@ -1,12 +1,11 @@
 const nodemailer = require("nodemailer");
-const ErrorHandler = require("./errorHandler");
 
 const sendEmail = async (email, subject, text) => {
     try {
         const transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
             service: process.env.MAIL_SERVICE,
-            port: 587,
+            port: 465,
             secure: true,
             auth: {
                 user: process.env.MAIL_USER,

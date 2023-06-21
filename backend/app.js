@@ -11,6 +11,7 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 app.use(function (req, res, next) {
+    // console.log(process.env.FRONTEND_BASE_URL);
     res.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_BASE_URL);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
