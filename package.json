@@ -2,6 +2,9 @@
     "name": "shopnow",
     "version": "1.0.0",
     "description": "full ecommerce site using mern",
+    "engines": {
+        "node": ">=14 <15"
+    },
     "main": "server.js",
     "scripts": {
         "start": "node backend/server.js",
@@ -32,8 +35,5 @@
     },
     "devDependencies": {
         "nodemon": "^2.0.22"
-    },
-    "engines": {
-        "node": ">=14.20.1 <15"
     }
 }
