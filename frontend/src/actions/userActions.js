@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
+
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -41,6 +43,8 @@ import {
 //login
 export const login = (email, password) => async (dispatch) => {
     try {
+        const cookies = new Cookies();
+
         dispatch({ type: LOGIN_REQUEST });
 
         const config = {
@@ -55,6 +59,8 @@ export const login = (email, password) => async (dispatch) => {
         // userInfo = JSON.stringify(userInfo);
 
         const { data } = await axios.post("/api/v1/login", userInfo, config);
+
+        cookies.set("token", data.token, { path: "/" });
 
         dispatch({
             type: LOGIN_SUCCESS,
