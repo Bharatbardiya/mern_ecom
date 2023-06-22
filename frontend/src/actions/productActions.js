@@ -60,6 +60,7 @@ export const newProduct = (productData) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true,
         };
 
         const { data } = await axios.post(
@@ -109,6 +110,7 @@ export const newReview = (reviewData) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true,
         };
 
         const { data } = await axios.put(`/api/v1/review`, reviewData, config);
@@ -130,7 +132,9 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
 
-        const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
+        const { data } = await axios.delete(`/api/v1/admin/product/${id}`, {
+            withCredentials: true,
+        });
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
@@ -148,7 +152,9 @@ export const getAdminProducts = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/admin/products`);
+        const { data } = await axios.get(`/api/v1/admin/products`, {
+            withCredentials: true,
+        });
 
         dispatch({
             type: ADMIN_PRODUCTS_SUCCESS,
@@ -167,7 +173,9 @@ export const getProductReviews = (id) => async (dispatch) => {
     try {
         dispatch({ type: GET_REVIEWS_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+        const { data } = await axios.get(`/api/v1/reviews?id=${id}`, {
+            withCredentials: true,
+        });
 
         dispatch({
             type: GET_REVIEWS_SUCCESS,
@@ -187,7 +195,8 @@ export const deleteReview = (id, productId) => async (dispatch) => {
         dispatch({ type: DELETE_REVIEW_REQUEST });
 
         const { data } = await axios.delete(
-            `/api/v1/reviews?id=${id}&productId=${productId}`
+            `/api/v1/reviews?id=${id}&productId=${productId}`,
+            { withCredentials: true }
         );
 
         dispatch({

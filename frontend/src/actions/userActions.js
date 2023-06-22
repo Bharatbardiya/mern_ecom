@@ -51,6 +51,7 @@ export const login = (email, password) => async (dispatch) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true,
         };
         let userInfo = {
             email,
@@ -108,6 +109,7 @@ export const updateProfile = (userData) => async (dispatch) => {
             headers: {
                 "Content-Type": "mltipart/form-data",
             },
+            withCredentials: true,
         };
 
         const { data } = await axios.put("/api/v1/me/update", userData, config);

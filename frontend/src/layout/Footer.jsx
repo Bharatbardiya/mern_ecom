@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="container pt-3">
                 <div className="row">
                     <div className="col-lg-6 col-md-12 mb-4">
-                        <h5 className="mb-3 text-dark">footer content</h5>
+                        <h5 className="mb-3 text-dark">About Website </h5>
                         <p>
                             This is A fully functional ecommerece website
                             developed by Mr. Bharat Bardiya. fill free to clone

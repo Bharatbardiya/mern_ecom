@@ -201,7 +201,7 @@ const CartItem = ({ item }) => {
                                 to={`/product/${item.product}`}
                                 className="nav-link"
                             >
-                                {item.name.substring(20) + "..."}
+                                {item?.name.substring(0, 20) + "..."}
                             </Link>
                         </div>
                     </div>
