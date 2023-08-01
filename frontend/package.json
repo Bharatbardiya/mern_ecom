@@ -25,6 +25,7 @@
         "redux": "^4.2.1",
         "redux-devtools-extension": "^2.13.9",
         "redux-thunk": "^2.4.2",
+        "sass": "^1.64.2",
         "universal-cookie": "^4.0.4",
         "web-vitals": "^2.1.4"
     },
@@ -51,5 +52,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "webpack": "^5.88.2"
     }
 }
