@@ -61,16 +61,16 @@ export const login = (email, password) => async (dispatch) => {
 
         const { data } = await axios.post("/api/v1/login", userInfo, config);
 
-        cookies.set("token", data.token, { path: "/" });
+        cookies.set("token", data?.token, { path: "/" });
 
         dispatch({
             type: LOGIN_SUCCESS,
-            payload: data.user,
+            payload: data?.user,
         });
     } catch (err) {
         dispatch({
             type: LOGIN_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -90,12 +90,12 @@ export const register = (userData) => async (dispatch) => {
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
-            payload: data.user,
+            payload: data?.user,
         });
     } catch (err) {
         dispatch({
             type: REGISTER_USER_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -116,12 +116,12 @@ export const updateProfile = (userData) => async (dispatch) => {
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
-            payload: data.success,
+            payload: data?.success,
         });
     } catch (err) {
         dispatch({
             type: UPDATE_PROFILE_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -145,12 +145,12 @@ export const updatePassword = (passwords) => async (dispatch) => {
 
         dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
-            payload: data.success,
+            payload: data?.success,
         });
     } catch (err) {
         dispatch({
             type: UPDATE_PASSWORD_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -174,12 +174,12 @@ export const forgotPassword = (email) => async (dispatch) => {
 
         dispatch({
             type: FORGOT_PASSWORD_SUCCESS,
-            payload: data.message,
+            payload: data?.message,
         });
     } catch (err) {
         dispatch({
             type: FORGOT_PASSWORD_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -203,12 +203,12 @@ export const newPassword = (token, passwords) => async (dispatch) => {
 
         dispatch({
             type: NEW_PASSWORD_SUCCESS,
-            payload: data.success,
+            payload: data?.success,
         });
     } catch (err) {
         dispatch({
             type: NEW_PASSWORD_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -222,12 +222,12 @@ export const loadUser = () => async (dispatch) => {
 
         dispatch({
             type: LOAD_USER_SUCCESS,
-            payload: data.user,
+            payload: data?.user,
         });
     } catch (err) {
         dispatch({
             type: LOAD_USER_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -243,7 +243,7 @@ export const logout = () => async (dispatch) => {
     } catch (err) {
         dispatch({
             type: LOGOUT_FAIL,
-            payload: err.response.data.message,
+            payload: err.response.data?.message,
         });
     }
 };
@@ -257,12 +257,12 @@ export const allUsers = () => async (dispatch) => {
 
         dispatch({
             type: ALL_USERS_SUCCESS,
-            payload: data.users,
+            payload: data?.users,
         });
     } catch (error) {
         dispatch({
             type: ALL_USERS_FAIL,
-            payload: error.response.data.message,
+            payload: error.response.data?.message,
         });
     }
 };
@@ -286,12 +286,12 @@ export const updateUser = (id, userData) => async (dispatch) => {
 
         dispatch({
             type: UPDATE_USER_SUCCESS,
-            payload: data.success,
+            payload: data?.success,
         });
     } catch (error) {
         dispatch({
             type: UPDATE_USER_FAIL,
-            payload: error.response.data.message,
+            payload: error.response.data?.message,
         });
     }
 };
@@ -305,12 +305,12 @@ export const getUserDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
-            payload: data.user,
+            payload: data?.user,
         });
     } catch (error) {
         dispatch({
             type: USER_DETAILS_FAIL,
-            payload: error.response.data.message,
+            payload: error.response.data?.message,
         });
     }
 };
@@ -324,12 +324,12 @@ export const deleteUser = (id) => async (dispatch) => {
 
         dispatch({
             type: DELETE_USER_SUCCESS,
-            payload: data.success,
+            payload: data?.success,
         });
     } catch (error) {
         dispatch({
             type: DELETE_USER_FAIL,
-            payload: error.response.data.message,
+            payload: error.response.data?.message,
         });
     }
 };

@@ -41,10 +41,10 @@ const Products = () => {
 
 const ProductCard = ({ id, imgSrc, title, rating, noOfReview, price }) => {
     return (
-        <div class="card my-3 mx-auto" style={{ width: "18rem" }}>
-            <img src={imgSrc} class="card-img-top" alt="..." />
-            <div class="card-body">
-                <h5 class="card-title">
+        <div className="card my-3 mx-auto" style={{ width: "18rem" }}>
+            <img src={imgSrc} className="card-img-top" alt="..." />
+            <div className="card-body">
+                <h5 className="card-title">
                     <Link className="link-dark " to={`/product/${id}`}>
                         {title}
                     </Link>

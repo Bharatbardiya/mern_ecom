@@ -38,7 +38,10 @@ const Register = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-
+        if(password.length<6){
+            toast.error("password must be more then 6 charchter");
+            return;
+        }
         const formData = new FormData();
         formData.set("name", name);
         formData.set("email", email);

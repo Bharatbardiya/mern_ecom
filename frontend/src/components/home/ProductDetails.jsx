@@ -95,8 +95,8 @@ const ProductDetails = () => {
                                         showThumbs={true}
                                         showArrows={true}
                                     >
-                                        {product?.images.map((image) => (
-                                            <div style={{ height: "400px" }}>
+                                        {product?.images.map((image, i) => (
+                                            <div key={i} style={{ height: "400px" }}>
                                                 <img
                                                     style={{
                                                         height: "inherit",

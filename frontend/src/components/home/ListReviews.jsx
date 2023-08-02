@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactStars from "react-stars";
 
 const ListReviews = ({ reviews }) => {
@@ -12,8 +12,8 @@ const ListReviews = ({ reviews }) => {
                             <hr className="mt-3 mb-0" />
                         </div>
 
-                        {reviews.map((review) => (
-                            <>
+                        {reviews.map((review,i) => (
+                            <Fragment key={i}>
                                 <div className="card-body p-4">
                                     <div className="d-flex flex-start">
                                         <div>
@@ -37,7 +37,7 @@ const ListReviews = ({ reviews }) => {
                                     </div>
                                 </div>
                                 <hr className="my-0" />
-                            </>
+                            </Fragment>
                         ))}
                     </div>
                 </div>

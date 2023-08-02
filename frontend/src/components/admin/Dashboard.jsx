@@ -25,23 +25,23 @@ const Dashboard = () => {
             <div className="row">
                 <Sidebar />
                 <div className="col-12 col-lg-9 col-xl-10">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card my-3 me-4 bg-primary-subtle">
-                                <div class="card-body">
-                                    <h5 class="card-title">Total Amount</h5>
-                                    <p class="card-text">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="card my-3 me-4 bg-primary-subtle">
+                                <div className="card-body">
+                                    <h5 className="card-title">Total Amount</h5>
+                                    <p className="card-text">
                                         ${totalAmount && totalAmount.toFixed(2)}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
-                            <div class="col-sm-6 col-lg-4 col-xl-3">
-                                <div class="card my-2 bg-success-subtle">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Products</h5>
-                                        <p class="card-text">
+                            <div className="col-sm-6 col-lg-4 col-xl-3">
+                                <div className="card my-2 bg-success-subtle">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Products</h5>
+                                        <p className="card-text">
                                             Total :{" "}
                                             <span className="ms-2 h6">
                                                 {products && products.length}
@@ -49,36 +49,36 @@ const Dashboard = () => {
                                         </p>
                                         <Link
                                             to="/admin/products"
-                                            class="btn btn-primary"
+                                            className="btn btn-primary"
                                         >
                                             View{" "}
-                                            <i class="bi bi-arrow-right"></i>
+                                            <i className="bi bi-arrow-right"></i>
                                         </Link>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3">
-                                <div class="card my-2 bg-warning-subtle">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Orders</h5>
-                                        <p class="card-text">
+                            <div className="col-sm-6 col-lg-4 col-xl-3">
+                                <div className="card my-2 bg-warning-subtle">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Orders</h5>
+                                        <p className="card-text">
                                             Total: {orders && orders.length}
                                         </p>
                                         <Link
                                             to="/admin/orders"
-                                            class="btn btn-primary"
+                                            className="btn btn-primary"
                                         >
                                             View{" "}
-                                            <i class="bi bi-arrow-right"></i>
+                                            <i className="bi bi-arrow-right"></i>
                                         </Link>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3">
-                                <div class="card my-2 bg-info-subtle">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Users</h5>
-                                        <p class="card-text">
+                            <div className="col-sm-6 col-lg-4 col-xl-3">
+                                <div className="card my-2 bg-info-subtle">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Users</h5>
+                                        <p className="card-text">
                                             Total :
                                             <b className="ms-1">
                                                 {users?.length}
@@ -86,28 +86,28 @@ const Dashboard = () => {
                                         </p>
                                         <Link
                                             to="/admin/users"
-                                            class="btn btn-primary"
+                                            className="btn btn-primary"
                                         >
                                             View{" "}
-                                            <i class="bi bi-arrow-right"></i>
+                                            <i className="bi bi-arrow-right"></i>
                                         </Link>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3">
-                                <div class="card my-2 bg-danger-subtle">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
+                            <div className="col-sm-6 col-lg-4 col-xl-3">
+                                <div className="card my-2 bg-danger-subtle">
+                                    <div className="card-body">
+                                        <h5 className="card-title">
                                             Special title treatment
                                         </h5>
-                                        <p class="card-text">
+                                        <p className="card-text">
                                             With supporting text below as a
                                             natural lead-in to additional
                                             content.
                                         </p>
-                                        <a href="#" class="btn btn-primary">
+                                        <a href="#" className="btn btn-primary">
                                             View{" "}
-                                            <i class="bi bi-arrow-right"></i>
+                                            <i className="bi bi-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>

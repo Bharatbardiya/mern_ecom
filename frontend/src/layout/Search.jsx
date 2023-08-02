@@ -7,6 +7,9 @@ const Search = () => {
 
     const searchHandler = (e) => {
         e.preventDefault();
+        if(!keyword){
+            return;
+        }
         if (keyword.trim()) {
             navigate(`/search/${keyword}`);
         } else {

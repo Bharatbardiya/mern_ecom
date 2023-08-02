@@ -37,7 +37,8 @@ const Payment = () => {
         dispatch(createOrder(new_order));
         if (error) {
             toast.error(error);
-        } else if (order) {
+        } else {
+            localStorage.removeItem("cartItems");
             toast.success("your order placed successfully");
             navigate("/");
         }
