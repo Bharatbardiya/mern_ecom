@@ -112,7 +112,7 @@ const Cart = () => {
                                         <div className="d-flex justify-content-between">
                                             <p className="mb-2">Discount:</p>
                                             <p className="mb-2 text-success">
-                                                ${0}
+                                            ₹{0}
                                             </p>
                                         </div>
 

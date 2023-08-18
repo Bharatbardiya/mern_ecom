@@ -146,7 +146,7 @@ const CartItem = ({ item }) => {
             <div className="col-sm-5 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                 <div className="">
                     <span className="h6">
-                        {`${item.quantity} unit x $${item.price} = $${(
+                        {`${item.quantity} unit x ₹${item.price} = ₹${(
                             item.price * item.quantity
                         ).toFixed(2)}`}
                     </span>
