@@ -31,7 +31,7 @@ const Dashboard = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">Total Amount</h5>
                                     <p className="card-text">
-                                        ${totalAmount && totalAmount.toFixed(2)}
+                                        ₹{totalAmount && totalAmount.toFixed(2)}
                                     </p>
                                 </div>
                             </div>

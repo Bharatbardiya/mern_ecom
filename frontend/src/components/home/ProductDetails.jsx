@@ -141,7 +141,7 @@ const ProductDetails = () => {
 
                                         <div className="mb-3">
                                             <span className="h5">
-                                                ${product?.price}
+                                            ₹{product?.price}
                                             </span>
                                             <span className="text-muted">
                                                 /per Item

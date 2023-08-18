@@ -97,7 +97,7 @@ const Cart = () => {
                                                 Subtotal price:
                                             </p>
                                             <p className="mb-2">
-                                                $
+                                                ₹
                                                 {cartItems.reduce(
                                                     (acc, item) =>
                                                         acc +
@@ -120,7 +120,7 @@ const Cart = () => {
                                         <div className="d-flex justify-content-between">
                                             <p className="mb-2">Total price:</p>
                                             <p className="mb-2 fw-bold">
-                                                $
+                                                ₹
                                                 {cartItems.reduce(
                                                     (acc, item) =>
                                                         acc +
@@ -242,10 +242,10 @@ const CartItem = ({ item }) => {
                     </button>
                 </div>
                 <div className="">
-                    <span className="h6">${totalPrice.toFixed(2)}</span> <br />
+                    <span className="h6">₹{totalPrice.toFixed(2)}</span> <br />
                     <small className="text-muted text-nowrap">
                         {" "}
-                        ${item.price} / per item{" "}
+                        ₹{item.price} / per item{" "}
                     </small>
                 </div>
             </div>

@@ -7,7 +7,7 @@ module.exports.isAuthenticatedUser = async (req, res, next) => {
     try {
         const token = req.cookies.token;
 
-        console.log("cookies :", req.cookies);
+        // console.log("cookies :", req.cookies);
         if (!token) {
             return next(new ErrorHandler("You are not authenticated", 401));
         }

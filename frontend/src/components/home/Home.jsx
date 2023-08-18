@@ -74,7 +74,7 @@ const Home = () => {
             <div className="m-4">
               <h3>Price</h3>
               <div>
-                <p>${price[1]}</p>
+                <p>₹{price[1]}</p>
                 <input
                   type="range"
                   name="price"

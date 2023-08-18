@@ -62,7 +62,7 @@ const ProductCard = ({ id, imgSrc, title, rating, noOfReview, price }) => {
                         ({noOfReview} Reviews)
                     </span>
                 </div>
-                <p className="card-text">${price}</p>
+                <p className="card-text">₹{price}</p>
 
                 <Link to={`/product/${id}`} className="btn btn-primary">
                     View Details

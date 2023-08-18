@@ -80,14 +80,14 @@ const ConfirmOrder = () => {
                                             Shipping Charges:
                                         </p>
                                         <p className="mb-2 text-muted">
-                                            ${shippingPrice}
+                                        ₹{shippingPrice}
                                         </p>
                                     </div>
 
                                     <div className="d-flex justify-content-between">
                                         <p className="mb-2">Tax :</p>
                                         <p className="mb-2 text-muted">
-                                            ${taxPrice}
+                                        ₹{taxPrice}
                                         </p>
                                     </div>
 
@@ -95,7 +95,7 @@ const ConfirmOrder = () => {
                                     <div className="d-flex justify-content-between">
                                         <p className="mb-2">Total price:</p>
                                         <p className="mb-2 fw-bold">
-                                            ${totalPrice}
+                                        ₹{totalPrice}
                                         </p>
                                     </div>
 

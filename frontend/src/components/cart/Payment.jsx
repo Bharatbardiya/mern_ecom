@@ -91,7 +91,7 @@ const Payment = () => {
                             className="btn btn-primary my-2 mx-3"
                             disabled={loading ? true : false}
                         >
-                            Pay ${orderInfo.totalPrice}
+                            Pay ₹{orderInfo.totalPrice}
                         </button>
                     </form>
                 </div>
